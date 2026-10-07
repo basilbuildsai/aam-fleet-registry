@@ -12,8 +12,8 @@ This repository holds the published website. It is rebuilt every night from publ
 - **Own designs and support fleets.** Aircraft each company designed itself are counted separately from the chase planes, trainers and test conversions it owns.
 - **Reserved N-numbers.** Registrations held for aircraft that have not been registered yet.
 - **Who is flying.** Which aircraft were seen airborne on public ADS-B in the last 45 days, with replay links to adsb.lol and ADS-B Exchange.
-- **Where they fly.** A flight map drawn like a site plan, with two close-ups of the busiest test areas, Monterey Bay and Salinas for Joby and Archer, and Lake Champlain for BETA.
-- **Featured flights.** Notable trips stay on the map permanently. These include Joby's autonomous Cessna Caravan (N101XW) flying coast to coast and back in September 2026, and BETA's all-electric CX300 (N401NZ) touring the southern U.S. since late August 2026.
+- **Where they fly.** A flight map drawn like a site plan, with Alaska and Hawaii insets and two close-ups of the busiest test areas, Monterey Bay and Salinas for Joby and Archer, and Lake Champlain for BETA.
+- **Featured flights.** Notable trips stay on the map permanently. These include Joby's autonomous Cessna Caravan (N101XW) flying coast to coast and back in September 2026, and BETA's all-electric CX300 (N401NZ) flying the Surf Air trial in Hawaii in June and July 2026, then touring the western and southern U.S. since early August.
 - **Latest from the registry and the radar.** A short briefing written by each night's build, covering new registration certificates, reservations and the week's flying.
 - **A manufacturer directory** covering U.S. and international programs, including those with no U.S. registrations.
 
@@ -21,7 +21,7 @@ This repository holds the published website. It is rebuilt every night from publ
 
 1. Each night the build downloads the FAA Releasable Aircraft Database, with its current registrations, cancellations, reservations and aircraft models.
 2. It matches aircraft to companies by registrant and by the maker listed in the FAA model table. Unrelated companies that share a name were removed by hand.
-3. It checks adsb.lol's public daily history for every registered aircraft. A day counts as seen only when the aircraft reported airborne positions.
+3. It checks adsb.lol's public daily history for every registered aircraft. A day counts as seen only when the aircraft reported airborne positions. Flights older than the live history come from adsb.lol's open daily archive.
 4. It draws each day's airborne legs on the map, simplified to about 150 m (500 ft).
 5. GitHub Actions publishes the result here, and GitHub Pages serves it.
 
