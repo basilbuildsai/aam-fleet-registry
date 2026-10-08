@@ -20,6 +20,49 @@ This repository holds the published website. It is rebuilt every night from publ
 
 ## How it works
 
+```mermaid
+flowchart TB
+    subgraph SRC["Public data"]
+        direction LR
+        FAA["<b>FAA aircraft registry</b><br/>Registrations, cancellations,<br/>reservations, aircraft models"]
+        LIVE["<b>adsb.lol daily history</b><br/>Last ~6 weeks of<br/>ADS-B traces"]
+        ARCH["<b>adsb.lol open archive</b><br/>Daily traces back<br/>to January 2025"]
+    end
+
+    subgraph BUILD["Nightly build · Python on GitHub Actions"]
+        direction TB
+        MATCH["<b>Match</b><br/>Aircraft to 41 companies by<br/>registrant and maker"]
+        SEEN["<b>Check</b><br/>Which aircraft flew,<br/>airborne days only"]
+        DRAW["<b>Draw</b><br/>Each day's flight legs,<br/>simplified to ~150 m"]
+        BRIEF["<b>Write</b><br/>The briefing, counts<br/>and featured flights"]
+        MATCH --> SEEN --> DRAW --> BRIEF
+    end
+
+    QA{{"<b>AI review agent</b><br/>Checks each release against<br/>the raw FAA files"}}
+
+    subgraph OUT["Published"]
+        direction LR
+        REPO["<b>This repository</b><br/>Built site, updated<br/>every night"]
+        SITE["<b>GitHub Pages</b><br/>basilbuildsai.github.io/<br/>aam-fleet-registry"]
+        REPO --> SITE
+    end
+
+    FAA --> MATCH
+    LIVE --> SEEN
+    ARCH -. "backfill" .-> DRAW
+    BRIEF --> REPO
+    QA -. "before changes go live" .-> BRIEF
+
+    classDef data fill:#F4E04D,stroke:#0A0A0A,color:#0A0A0A,stroke-width:1.5px
+    classDef step fill:#FFFFFF,stroke:#0A0A0A,color:#0A0A0A,stroke-width:1.5px
+    classDef out fill:#E8622C,stroke:#0A0A0A,color:#0A0A0A,stroke-width:1.5px
+    classDef qa fill:#0A0A0A,stroke:#0A0A0A,color:#FFFFFF
+    class FAA,LIVE,ARCH data
+    class MATCH,SEEN,DRAW,BRIEF step
+    class REPO,SITE out
+    class QA qa
+```
+
 1. Each night the build downloads the FAA Releasable Aircraft Database, with its current registrations, cancellations, reservations and aircraft models.
 2. It matches aircraft to companies by registrant and by the maker listed in the FAA model table. Unrelated companies that share a name were removed by hand.
 3. It checks adsb.lol's public daily history for every registered aircraft. A day counts as seen only when the aircraft reported airborne positions. Flights older than the live history, back to January 2025, come from adsb.lol's open daily archive.
