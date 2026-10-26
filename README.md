@@ -92,6 +92,6 @@ Company status notes reflect public reporting and are reviewed by hand.
 
 ## Built by
 
-Basil Yap. Accelerating autonomy and AI in aviation. First U.S. BVLOS waiver without visual observers. Private Pilot, Part 107.
+Basil Yap. Accelerating autonomy and AI in aviation. Building open-source projects.
 
 Corrections and questions are welcome on [LinkedIn](https://www.linkedin.com/in/basil-yap-461b1975/).
